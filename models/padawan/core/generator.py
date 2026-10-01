@@ -13,15 +13,16 @@ class LLMClient(Protocol):
         ...
 
 
-def generate_bdd_tests(source_code: str, client: LLMClient) -> str:
+def generate_bdd_tests(source_code: str, module_name: str, client: LLMClient) -> str:
     """Generate a pytest-bdd feature file and step definitions for the given source.
 
     Args:
         source_code: The Python source module to generate tests for.
+        module_name: The module name step definitions should import the source from.
         client: An LLMClient used to perform the actual generation.
 
     Returns:
         The LLM's generated pytest-bdd output.
     """
-    prompt = build_prompt(source_code)
+    prompt = build_prompt(source_code, module_name)
     return client.generate(prompt)

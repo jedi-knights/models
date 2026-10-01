@@ -19,7 +19,7 @@ def test_generate_bdd_tests_returns_the_clients_response() -> None:
     source = "def add(a: int, b: int) -> int:\n    return a + b\n"
 
     # Act
-    result = generate_bdd_tests(source, client=client)
+    result = generate_bdd_tests(source, module_name="calc", client=client)
 
     # Assert
     assert result == "Feature: addition\n"
@@ -31,8 +31,21 @@ def test_generate_bdd_tests_sends_the_source_code_to_the_client() -> None:
     source = "def add(a: int, b: int) -> int:\n    return a + b\n"
 
     # Act
-    generate_bdd_tests(source, client=client)
+    generate_bdd_tests(source, module_name="calc", client=client)
 
     # Assert
     assert client.last_prompt is not None
     assert source in client.last_prompt
+
+
+def test_generate_bdd_tests_sends_the_module_name_to_the_client() -> None:
+    # Arrange
+    client = FakeLLMClient(response="")
+    source = "def add(a: int, b: int) -> int:\n    return a + b\n"
+
+    # Act
+    generate_bdd_tests(source, module_name="calc", client=client)
+
+    # Assert
+    assert client.last_prompt is not None
+    assert "calc" in client.last_prompt

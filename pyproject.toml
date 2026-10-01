@@ -8,6 +8,7 @@ dependencies = [
     "anthropic>=1.11.0",
     "click>=8.5.0",
     "pydantic-settings>=2.15.0",
+    "pytest-bdd>=9.0.0",
 ]
 
 [dependency-groups]
