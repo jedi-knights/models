@@ -4,13 +4,18 @@ version = "0.1.0"
 description = "Mono-repo for AI/ML model development under jedi-knights, with shared data/training/eval/logging infra in common/."
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "anthropic>=1.11.0",
+    "click>=8.5.0",
+    "pydantic-settings>=2.15.0",
+]
 
 [dependency-groups]
 dev = [
     "pytest>=8.0",
     "ruff>=0.6",
     "mypy>=1.11",
+    "pytest-mock>=3.16.0",
 ]
 
 [tool.ruff]
